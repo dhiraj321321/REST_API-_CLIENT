@@ -39,3 +39,5 @@ Proper error messages related to an entered wrong city or with API calls were sh
 Working
 Run an application.
 Give city name and this application receives the current condition for that input city.
+
+**output**:![Image](https://github.com/user-attachments/assets/94c5a33b-9fb4-4982-b32d-c5c96d28b0e3)
