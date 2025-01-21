@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class RestAPI {
     public static void main(String[] args) {
-        String apiKey = "8671e27df22e659c257dd16574216c22"; // Replace with your OpenWeather API key
+        String apiKey = "8671e27df22e659c257dd16574216c22"; 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the city name:");
@@ -23,7 +23,7 @@ public class RestAPI {
         String apiUrl = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric", city, apiKey);
 
         try {
-            // Use Java 11 HTTP Client
+            
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiUrl))
@@ -32,16 +32,16 @@ public class RestAPI {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // Parse the JSON response
+            
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = mapper.readTree(response.body());
 
-            // Check for errors in the response
+            
             if (jsonNode.has("cod") && jsonNode.get("cod").asInt() != 200) {
                 String message = jsonNode.has("message") ? jsonNode.get("message").asText() : "Unknown error";
                 System.out.println("Error: " + message);
             } else {
-                // Extract data safely
+                
                 String cityName = jsonNode.has("name") ? jsonNode.get("name").asText() : "N/A";
                 double temperature = jsonNode.has("main") && jsonNode.get("main").has("temp")
                         ? jsonNode.get("main").get("temp").asDouble()
@@ -50,7 +50,7 @@ public class RestAPI {
                         ? jsonNode.get("weather").get(0).get("description").asText()
                         : "N/A";
 
-                // Display the weather details
+                
                 System.out.println("Weather Information:");
                 System.out.println("---------------------");
                 System.out.println("City: " + cityName);
